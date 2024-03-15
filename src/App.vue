@@ -25,9 +25,9 @@
 </template>
 
 <script>
-import AppField from "./components/AppField.vue";
-import AppProgressBar from "./components/AppProgressBar.vue";
-import AppResultTable from "./components/AppResultTable.vue";
+import AppField from "./components/FieldPage.vue";
+import AppProgressBar from "./components/ProgressBar.vue";
+import AppResultTable from "./components/ResultTable.vue";
 
 export default {
   components: {
@@ -96,3 +96,4 @@ export default {
   },
 };
 </script>
+./components/Field.vue./components/ProgressBar.vue./components/ResultTable.vue./components/FieldPage.vue
