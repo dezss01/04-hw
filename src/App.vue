@@ -1,0 +1,98 @@
+<template>
+  <div class="sample">
+    <form v-if="!showResultTable" @submit.prevent="sendForm">
+      <div>
+        <app-field
+          v-for="(field, i) in info"
+          :key="i"
+          :label="field.label"
+          :value="field.value"
+          :valid="field.valid"
+          @updated="onUpdate(i, $event)"
+          class="mb-4"
+        />
+      </div>
+      <app-progress-bar :progressBarWidth="progressStyles" class="mb-3" />
+      <!-- {{ fieldsDone }}
+      {{ formReady }}
+      {{ progressStyles }} -->
+      <button class="btn btn-primary" :disabled="!formReady">Send Data</button>
+    </form>
+    <div v-if="showResultTable">
+      <app-result-table :resultTable="this.info" />
+    </div>
+  </div>
+</template>
+
+<script>
+import AppField from "./components/AppField.vue";
+import AppProgressBar from "./components/AppProgressBar.vue";
+import AppResultTable from "./components/AppResultTable.vue";
+
+export default {
+  components: {
+    AppField,
+    AppProgressBar,
+    AppResultTable,
+  },
+  data: () => ({
+    info: [
+      {
+        label: "Name",
+        value: "",
+        pattern: /^[a-zA-Z ]{2,30}$/,
+      },
+      {
+        label: "Phone",
+        value: "",
+        pattern: /^[0-9]{7,14}$/,
+      },
+      {
+        label: "Email",
+        value: "",
+        pattern: /.+/,
+      },
+      {
+        label: "Some Field 1",
+        value: "",
+        pattern: /.+/,
+      },
+      {
+        label: "Some Field 2",
+        value: "",
+        pattern: /.+/,
+      },
+    ],
+    showResultTable: false,
+  }),
+  computed: {
+    fieldsDone() {
+      // return this.info.reduce((total, field) => total + (field.valid ? 1 : 0), 0)
+      return this.info.filter((field) => field.valid).length;
+    },
+    formReady() {
+      return this.fieldsDone >= this.info.length;
+    },
+    progressStyles() {
+      let rel = (this.fieldsDone / this.info.length) * 100;
+      return { width: rel + "%" };
+    },
+  },
+  methods: {
+    onUpdate(i, val) {
+      let field = this.info[i];
+      field.value = val.trim();
+      field.valid = field.pattern.test(field.value);
+    },
+    sendForm() {
+      this.showResultTable = !this.showResultTable;
+    },
+  },
+  created() {
+    this.info.forEach((field) => {
+      field.valid = false;
+      field.activated = false;
+    });
+  },
+};
+</script>
