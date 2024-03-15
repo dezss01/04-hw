@@ -1,5 +1,5 @@
 <template>
-  <div class="sample">
+  <div class="container mt-2">
     <form v-if="!showResultTable" @submit.prevent="sendForm">
       <div>
         <app-field
@@ -12,13 +12,15 @@
           class="mb-4"
         />
       </div>
-      <app-progress-bar :progressBarWidth="progressStyles" class="mb-3" />
+      <app-progress-bar :current="fieldsDone" :max="info.length" class="mb-3" />
       <!-- {{ fieldsDone }}
       {{ formReady }}
       {{ progressStyles }} -->
-      <button class="btn btn-primary" :disabled="!formReady">Send Data</button>
+      <button class="btn btn-primary" :disabled="!formReady" type="submit">
+        Send Data
+      </button>
     </form>
-    <div v-if="showResultTable">
+    <div v-else>
       <app-result-table :resultTable="this.info" />
     </div>
   </div>
@@ -85,7 +87,9 @@ export default {
       field.valid = field.pattern.test(field.value);
     },
     sendForm() {
-      this.showResultTable = !this.showResultTable;
+      if (this.formReady) {
+        this.showResultTable = !this.showResultTable;
+      }
     },
   },
   created() {

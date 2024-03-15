@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     fontAwesomeCheckedClass() {
-      return this.valid ? "fa fa-check-circle" : "fa fa-exclamation-circle";
+      return this.valid ? "check-circle" : "exclamation-circle";
     },
     checkedClass() {
       return this.valid ? "text-success" : "text-danger";
