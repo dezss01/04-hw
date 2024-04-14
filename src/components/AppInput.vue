@@ -21,7 +21,6 @@
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {faSquarePlus} from "@fortawesome/free-regular-svg-icons";
 import {faMinus} from "@fortawesome/free-solid-svg-icons";
-import {data} from "../data.js";
 
 
 const props = defineProps({
@@ -55,6 +54,7 @@ const removeCountByButton = () => {
     emit('update:count', props.count -= 1)
   }
 }
+
 </script>
 
 <style scoped>
