@@ -17,10 +17,8 @@
         <td>
           <AppInput
               v-model:count="product.count"
-              :max-count="product.maxCount"
-              :min-count="product.minCount"
-              @plus-count="addCountByButton(key)"
-              @minus-count="removeCountByButton(key)"
+              v-model:max-count="product.maxCount"
+              v-model:min-count="product.minCount"
           />
         </td>
         <td>{{ product.quantity }}</td>
@@ -39,18 +37,7 @@ import {data} from "./data.js";
 import {computed} from "vue";
 
 
-function addCountByButton(i) {
-  if(data.value[i].count === 0) {
-    data.value[i].count = data.value[i].minCount
-  } else if(data.value[i].count < data.value[i].maxCount) {
-    data.value[i].count += 1;
-  }
-}
-function removeCountByButton(i) {
-  if(data.value[i].count > data.value[i].minCount) {
-    data.value[i].count -= 1;
-  }
-}
+
 
 
 const productsTotalPrice = computed(() => {
