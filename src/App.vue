@@ -21,7 +21,7 @@
               v-model:min-count="product.minCount"
           />
         </td>
-        <td>{{ product.quantity }}</td>
+        <td>{{ product.price * product.count }}</td>
 
       </tr>
       </tbody>
@@ -35,7 +35,6 @@ import TheNav from "./components/TheNav.vue";
 import AppInput from "./components/AppInput.vue";
 import {data} from "./data.js";
 import {computed} from "vue";
-
 
 
 

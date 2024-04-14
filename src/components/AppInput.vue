@@ -1,17 +1,19 @@
 
 
 <template>
-  <button class="btn btn-danger btn-sm" @click="removeCountByButton">
-    <FontAwesomeIcon :icon="faMinus" class=""/>
+  <button @click="removeCountByButton" class="btn btn-danger btn-sm">
+    <FontAwesomeIcon :icon="faMinus" />
   </button>
   <input :value="count" @input="handleUpdateCount" type="text" class="mx-2" >
-  <button class="btn btn-success btn-sm" @click="addCountByButton">
-    <FontAwesomeIcon :icon="faSquarePlus" class=""/>
+  <button @click="addCountByButton" class="btn btn-success btn-sm">
+    <FontAwesomeIcon :icon="faSquarePlus" />
   </button>
-  <div>
-    <p>Count: {{ props.count }}</p>
-    <p>MaxCount: {{ props.maxCount }}</p>
-    <p>MinCount: {{ props.minCount }}</p>
+  <button class="btn btn-danger btn-sm mx-2" @click="clearCount">
+    <FontAwesomeIcon :icon="faTrash" />
+  </button>
+  <div class="mt-3">
+    <div>Минимальное количество товаров: {{ props.minCount }}</div>
+    <div>Максимальное количество товаров: {{ props.maxCount }}</div>
   </div>
 
 </template>
@@ -21,12 +23,14 @@
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {faSquarePlus} from "@fortawesome/free-regular-svg-icons";
 import {faMinus} from "@fortawesome/free-solid-svg-icons";
+import {faTrash} from "@fortawesome/free-solid-svg-icons/faTrash";
+
 
 
 const props = defineProps({
   count: { type: Number, required: true },
   minCount: { type: Number, required: true },
-  maxCount: { type: Number, required: true }
+  maxCount: { type: Number, required: true },
 })
 
 const emit = defineEmits(['update:count'])
@@ -53,6 +57,10 @@ const removeCountByButton = () => {
   if(props.count > props.minCount) {
     emit('update:count', props.count -= 1)
   }
+}
+
+const clearCount = () => {
+  emit('update:count', 0)
 }
 
 </script>
