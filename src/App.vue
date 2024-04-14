@@ -1,6 +1,7 @@
 <template>
   <TheNav />
   <div class="container">
+    <h1>Корзина товаров</h1>
     <table class="table table-bordered mt-3">
       <thead>
       <tr>

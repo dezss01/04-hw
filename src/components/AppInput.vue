@@ -1,5 +1,3 @@
-
-
 <template>
   <button
       @click="removeCountByButton"
@@ -33,14 +31,11 @@
 </template>
 
 <script setup>
-
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {faSquarePlus} from "@fortawesome/free-regular-svg-icons";
 import {faMinus} from "@fortawesome/free-solid-svg-icons";
 import {faTrash} from "@fortawesome/free-solid-svg-icons/faTrash";
 import {computed} from "vue";
-
-
 
 const props = defineProps({
   count: { type: Number, required: true },
@@ -52,15 +47,6 @@ const emit = defineEmits(['update:count'])
 
 const handleUpdateCount = (event) => {
   let result = Number(event.target.value)
-  // if(result < props.minCount) {
-  //   result = props.minCount
-  // } else if(result > props.maxCount) {
-  //   result = props.maxCount
-  // } else if(Number.isNaN(result)) {
-  //   result = props.minCount
-  // }
-  // emit('update:count', result)
-  // ниже реализация от gpt
   if(Number.isNaN(result)) {
     result = props.minCount
   } else {
@@ -68,6 +54,7 @@ const handleUpdateCount = (event) => {
   }
   emit('update:count', result)
 }
+
 const addCountByButton = () => {
   if(props.count === 0) {
     emit('update:count', props.minCount)
@@ -75,20 +62,16 @@ const addCountByButton = () => {
     emit('update:count', (props.count + 1))
   }
 }
+
 const removeCountByButton = () => {
   if(props.count > props.minCount) {
     emit('update:count', (props.count - 1))
   }
 }
+
 const clearCount = () => {
   emit('update:count', 0)
 }
-const disableMinusButton = computed(() => {
-  return props.count <= props.minCount
-})
-const disablePlusButton = computed(() => {
-  return props.count >= props.maxCount
-})
 
 const inputValueMax = (event) => {
   if(Number.isNaN(event.target.value)) {
@@ -98,8 +81,13 @@ const inputValueMax = (event) => {
     event.target.value = props.maxCount
   }
 }
+
+const disableMinusButton = computed(() => {
+  return props.count <= props.minCount
+})
+
+const disablePlusButton = computed(() => {
+  return props.count >= props.maxCount
+})
+
 </script>
-
-<style scoped>
-
-</style>
