@@ -22,7 +22,6 @@
           />
         </td>
         <td>{{ product.price * product.count }}</td>
-
       </tr>
       </tbody>
     </table>
@@ -36,13 +35,8 @@ import AppInput from "./components/AppInput.vue";
 import {data} from "./data.js";
 import {computed} from "vue";
 
-
-
-
 const productsTotalPrice = computed(() => {
   return Object.values(data.value).reduce((quantity, product) => quantity + (product.price * product.count), 0)
 })
-
-
 
 </script>
